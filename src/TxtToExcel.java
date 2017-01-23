@@ -16,7 +16,7 @@ public class TxtToExcel {
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("Похожие модели");
 
-        try (BufferedReader br = new BufferedReader(new FileReader("D:\\practice\\Papa\\src\\Final3.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("D:\\practice\\Papa\\src\\Final.txt"))) {
             while ((line = br.readLine()) != null) {
                 String[] s = line.split("\t");
                 if (s.length == 4)
@@ -35,17 +35,18 @@ public class TxtToExcel {
         row.createCell(2).setCellValue("Name");
         row.createCell(3).setCellValue("Related_product");
 
+
+
+        for (DataModel dataModel : listTxt) {
+            createSheetHeader(sheet, ++rowNum, dataModel);
+        }
         sheet.autoSizeColumn(0);
         sheet.autoSizeColumn(1);
         sheet.autoSizeColumn(2);
         sheet.autoSizeColumn(3);
 
-        for (DataModel dataModel : listTxt) {
-            createSheetHeader(sheet, ++rowNum, dataModel);
-        }
-
         try {
-            workbook.write(new FileOutputStream("D:\\practice\\Papa\\src\\Final3.xls"));
+            workbook.write(new FileOutputStream("D:\\practice\\Papa\\src\\Final.xls"));
             System.out.println("Файл успешно создан");
 
         } catch (IOException e) {
