@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
  * Created by GetFire on 23.01.2017.
  */
 public class CreateTXTv1 {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Map<Integer, String> excelFile = new HashMap<>();
         Map<Integer, String> resourcecFile = new HashMap<>();
         List<String> neededLines = new ArrayList<>();
@@ -42,10 +42,11 @@ public class CreateTXTv1 {
                         if (b.contains(d.get(1))) {
                             List<String> c = b.stream().filter(a -> !a.equals(d.get(1))).collect(Collectors.toList());
 // Remove duplicates
-                            Set<String>set = new HashSet<>(c);
+                            Set<String> set = new HashSet<>(c);
                             c.clear();
                             c.addAll(set);
-                                                        String[] v = c.toArray(new String[c.size()]);
+
+                            String[] v = c.toArray(new String[c.size()]);
                             String g = StringUtil.join(v, ", "); //готовая строка, что мне нужна
                             neededLines.add(g);
                             sB.append(d.get(0));
@@ -66,18 +67,18 @@ public class CreateTXTv1 {
             }
             bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("D:\\practice\\Papa\\src\\Final2.txt"), Charset.forName("UTF-8")));
             bw.write(content.toString());
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
-                if (br!=null)
+                if (br != null)
                     br.close();
-                if (br1!=null)
+                if (br1 != null)
                     br.close();
-                if (bw!=null)
+                if (bw != null)
                     bw.close();
-            }catch (IOException ex){
-                System.out.println(ex.getClass().getSimpleName()+": "+ ex.getMessage());
+            } catch (IOException ex) {
+                System.out.println(ex.getClass().getSimpleName() + ": " + ex.getMessage());
             }
         }
     }
