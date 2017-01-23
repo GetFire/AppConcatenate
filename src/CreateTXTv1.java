@@ -41,8 +41,11 @@ public class CreateTXTv1 {
                         List<String> b = Arrays.asList(s1.split(", "));
                         if (b.contains(d.get(1))) {
                             List<String> c = b.stream().filter(a -> !a.equals(d.get(1))).collect(Collectors.toList());
-
-                            String[] v = c.toArray(new String[c.size()]);
+// Remove duplicates
+                            Set<String>set = new HashSet<>(c);
+                            c.clear();
+                            c.addAll(set);
+                                                        String[] v = c.toArray(new String[c.size()]);
                             String g = StringUtil.join(v, ", "); //готовая строка, что мне нужна
                             neededLines.add(g);
                             sB.append(d.get(0));
@@ -61,7 +64,7 @@ public class CreateTXTv1 {
                     }
                 }
             }
-            bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("D:\\practice\\Papa\\src\\Final1.txt"), Charset.forName("UTF-8")));
+            bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("D:\\practice\\Papa\\src\\Final2.txt"), Charset.forName("UTF-8")));
             bw.write(content.toString());
         }catch (IOException e){
             e.printStackTrace();
